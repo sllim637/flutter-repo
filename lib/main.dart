@@ -35,19 +35,8 @@ class soir extends StatefulWidget {
 }
 
 class _soirState extends State<soir> {
-  String value ="hello initialization";
-  String value1 ="hello initialization of value1";
-  void onClick(){
-    setState((){
-      value= "i am setState function";
-    });
-  }
-  void onClick2(String value2){
-    setState((){
-      value1= value2;
-    });
-  }
   var info = "slim hammami";
+  var note =0 ;
   initState(){
     super.initState();
     info = "bienvenue sur le tuo";
@@ -60,19 +49,29 @@ class _soirState extends State<soir> {
       ),
       // ignore: deprecated_member_use
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children:  <Widget>[
-          RaisedButton(
-            onPressed: () {  onClick();},
-            child: Text("1er boutton" , style: TextStyle(color: Colors.green),),
+          FlatButton(
+              onPressed: (){
+                debugPrint("----flat button is ok ---");
+              },
+              child: Text("flat button here "  ,style: TextStyle(fontSize: 20),),
+          color: Colors.blue,
+            focusColor: Colors.white,
           ),
-          Text(value , style: TextStyle(color: Colors.deepOrange),),
-          Divider(height: 10,),
-          RaisedButton(
-            onPressed: () { onClick2( "je suis la valeur passe par la deuxieme parametre"); },
-            child: Text("2eme  boutton" , style: TextStyle(color: Colors.blue),),
+          IconButton(
+              onPressed: () {
+            debugPrint("--- icon button is ok ---");
+            setState((){
+              note++;
+            });
+
+          },
+              icon: Icon(Icons.accessible_forward_rounded, color: Colors.amber, size: 20,),
+            tooltip: 'J\'aime'
           ),
-          Text(value1 , style: TextStyle(color: Colors.black),),
+
+          Text("votre point de vue est : $note")
         ],
       )
     )
