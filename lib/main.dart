@@ -35,6 +35,18 @@ class soir extends StatefulWidget {
 }
 
 class _soirState extends State<soir> {
+  String value ="hello initialization";
+  String value1 ="hello initialization of value1";
+  void onClick(){
+    setState((){
+      value= "i am setState function";
+    });
+  }
+  void onClick2(String value2){
+    setState((){
+      value1= value2;
+    });
+  }
   var info = "slim hammami";
   initState(){
     super.initState();
@@ -47,18 +59,22 @@ class _soirState extends State<soir> {
         title: Text(info),
       ),
       // ignore: deprecated_member_use
-      body: RaisedButton(
-        onPressed: () {
-          print('je suis appuiyé');
-         setState((){
-           info = "je suis change vers rim hammami";
-         });
-
-          },
-
-        child: Text('valider'),
-
-      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:  <Widget>[
+          RaisedButton(
+            onPressed: () {  onClick();},
+            child: Text("1er boutton" , style: TextStyle(color: Colors.green),),
+          ),
+          Text(value , style: TextStyle(color: Colors.deepOrange),),
+          Divider(height: 10,),
+          RaisedButton(
+            onPressed: () { onClick2( "je suis la valeur passe par la deuxieme parametre"); },
+            child: Text("2eme  boutton" , style: TextStyle(color: Colors.blue),),
+          ),
+          Text(value1 , style: TextStyle(color: Colors.black),),
+        ],
+      )
     )
     ;
   }
