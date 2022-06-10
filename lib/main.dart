@@ -35,13 +35,27 @@ class soir extends StatefulWidget {
 }
 
 class _soirState extends State<soir> {
-  var info = "slim hammami";
-  var note =0 ;
-  String value = "" ;
-  void onShow(){
+  int val1 =0;
+  int val2 = 0;
+  var info = "hello slim";
+  changeVal1(int s){
     setState((){
-      value = new DateTime.now().toString();
+      val1=s;
     });
+  }
+  changeVal2(int t){
+    setState((){
+      val2=t;
+    });
+  }
+  Widget radio(){
+    List <Widget> radio_button = [];
+    for(int i= 0 ;i<4 ; i++){
+      radio_button.add(Radio(value: i, groupValue: val1, onChanged: changeVal1(i)));
+    }
+      Column column = Column(children: radio_button,);
+    return column ;
+
   }
   initState(){
     super.initState();
@@ -54,21 +68,14 @@ class _soirState extends State<soir> {
         title: Text(info),
       ),
       // ignore: deprecated_member_use
-      body: Column(
-        children: <Widget> [
-          Text("maintenant la date est : $value" ,style: TextStyle(fontSize: 50),)
-        ],
-      ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){
-              print("hello float action button");
-              onShow();
-          },
-          backgroundColor: Colors.amber,
-          label: Text("time "),
-          icon: Icon(Icons.timer),
-
+      body: Center(
+        child: Column(
+          children:<Widget> [
+            radio(),
+            Text("bienvenur chez slim hammami" , style: TextStyle(fontSize: 25 , color: Colors.deepOrange),)
+          ],
         ),
+      ),
     )
     ;
   }
