@@ -37,6 +37,12 @@ class soir extends StatefulWidget {
 class _soirState extends State<soir> {
   var info = "slim hammami";
   var note =0 ;
+  String value = "" ;
+  void onShow(){
+    setState((){
+      value = new DateTime.now().toString();
+    });
+  }
   initState(){
     super.initState();
     info = "bienvenue sur le tuo";
@@ -49,31 +55,20 @@ class _soirState extends State<soir> {
       ),
       // ignore: deprecated_member_use
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children:  <Widget>[
-          FlatButton(
-              onPressed: (){
-                debugPrint("----flat button is ok ---");
-              },
-              child: Text("flat button here "  ,style: TextStyle(fontSize: 20),),
-          color: Colors.blue,
-            focusColor: Colors.white,
-          ),
-          IconButton(
-              onPressed: () {
-            debugPrint("--- icon button is ok ---");
-            setState((){
-              note++;
-            });
-
-          },
-              icon: Icon(Icons.accessible_forward_rounded, color: Colors.amber, size: 20,),
-            tooltip: 'J\'aime'
-          ),
-
-          Text("votre point de vue est : $note")
+        children: <Widget> [
+          Text("maintenant la date est : $value" ,style: TextStyle(fontSize: 50),)
         ],
-      )
+      ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){
+              print("hello float action button");
+              onShow();
+          },
+          backgroundColor: Colors.amber,
+          label: Text("time "),
+          icon: Icon(Icons.timer),
+
+        ),
     )
     ;
   }
