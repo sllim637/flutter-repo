@@ -45,11 +45,7 @@ class _soirState extends State<soir> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: const Icon(
-          Icons.fastfood,
-          size: 30,
-        ),
-        actions:  <Widget>[
+        actions: <Widget>[
           IconButton(
               onPressed: increment,
               icon: Icon(
@@ -68,6 +64,29 @@ class _soirState extends State<soir> {
         ],
         backgroundColor: Colors.red,
         title: Text(info),
+      ),
+      drawer: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(child: Text(
+            "Flutter Framework", style: TextStyle(color: Colors.blue),
+          ),
+            decoration: BoxDecoration(color: Colors.black),
+          ),
+          ListTile(title: Text("dart"), onTap: () {
+            Navigator.pop(context);
+          },),
+          ListTile(title: Text("angular"), onTap: () {
+            Navigator.pop(context);
+          },),
+          ListTile(title: Text("reactjs"), onTap: () {
+            Navigator.pop(context);
+          },),
+          ListTile(title: Text("nestjs"), onTap: () {
+            Navigator.pop(context);
+          },)
+
+        ],
       ),
       // ignore: deprecated_member_use
       body: Center(
