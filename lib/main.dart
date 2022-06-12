@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,28 +37,26 @@ class soir extends StatefulWidget {
 }
 
 class _soirState extends State<soir> {
-  int val1 =0;
-  int val2 = 0;
-  var info = "hello slim";
-  changeVal1(int s){
+  String info = "bienvenue minsieur/madame";
+  bool val1 = false;
+  bool val2 = false;
+  double val3  = 0.0;
+  void onChangeVal1(bool s){
     setState((){
       val1=s;
     });
   }
-  changeVal2(int t){
+  void onChangeVal2(bool t){
     setState((){
       val2=t;
     });
   }
-  Widget radio(){
-    List <Widget> radio_button = [];
-    for(int i= 0 ;i<4 ; i++){
-      radio_button.add(Radio(value: i, groupValue: val1, onChanged: changeVal1(i)));
-    }
-      Column column = Column(children: radio_button,);
-    return column ;
-
+  void onChangeVal3(double d){
+    setState((){
+      val3=d;
+    });
   }
+
   initState(){
     super.initState();
     info = "bienvenue sur le tuo";
@@ -71,8 +71,11 @@ class _soirState extends State<soir> {
       body: Center(
         child: Column(
           children:<Widget> [
-            radio(),
-            Text("bienvenur chez slim hammami" , style: TextStyle(fontSize: 25 , color: Colors.deepOrange),)
+
+            SwitchListTile(value: val2, onChanged: onChangeVal2, activeColor: Colors.green ,
+              title: Text("valider interrupteur ")),
+            Text("valider le curseur ${(val3*100).round()}"),
+            Slider(value: val3, onChanged: onChangeVal3,)
           ],
         ),
       ),
