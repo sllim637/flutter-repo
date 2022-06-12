@@ -22,6 +22,25 @@ class _soirState extends State<soir> {
   String info = "bienvenue minsieur/madame";
   int value = 0;
 
+  void buttom_sheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "this is the details of tuto",
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
   void increment() {
     setState(() {
       value++;
@@ -65,27 +84,46 @@ class _soirState extends State<soir> {
         backgroundColor: Colors.red,
         title: Text(info),
       ),
+      persistentFooterButtons: <Widget>[
+        IconButton(onPressed: null, icon: Icon(Icons.zoom_out_map)),
+        IconButton(onPressed: null, icon: Icon(Icons.account_balance_wallet)),
+        IconButton(onPressed: null, icon: Icon(Icons.add)),
+        IconButton(onPressed: null, icon: Icon(Icons.add_comment))
+      ],
       drawer: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(child: Text(
-            "Flutter Framework", style: TextStyle(color: Colors.blue),
-          ),
+          DrawerHeader(
+            child: Text(
+              "Flutter Framework",
+              style: TextStyle(color: Colors.blue),
+            ),
             decoration: BoxDecoration(color: Colors.black),
           ),
-          ListTile(title: Text("dart"), onTap: () {
-            Navigator.pop(context);
-          },),
-          ListTile(title: Text("angular"), onTap: () {
-            Navigator.pop(context);
-          },),
-          ListTile(title: Text("reactjs"), onTap: () {
-            Navigator.pop(context);
-          },),
-          ListTile(title: Text("nestjs"), onTap: () {
-            Navigator.pop(context);
-          },)
-
+          ListTile(
+            title: Text("dart"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text("angular"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text("reactjs"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text("nestjs"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          )
         ],
       ),
       // ignore: deprecated_member_use
@@ -93,6 +131,7 @@ class _soirState extends State<soir> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            RaisedButton(onPressed: buttom_sheet , child: Text("Cliquer ici"),),
             Text(
               "the value is   $value",
               style: TextStyle(fontSize: 20, color: Colors.orange),
