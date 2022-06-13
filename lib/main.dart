@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,46 +22,54 @@ class soir extends StatefulWidget {
 
 class _soirState extends State<soir> {
   String info = "bienvenue minsieur/madame";
-  int value = 0;
   int _id = 0;
-  void increment() {
-    setState(() {
-      value++;
-    });
-  }
+  String dateValue = "";
+  List<BottomNavigationBarItem> _item = [];
 
-  void decrement() {
-    setState(() {
-      value--;
-    });
+  Future select_date() async {
+    DateTime? picker = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2018),
+        lastDate: DateTime(2030));
+    if (picker != null) {
+      setState(() {
+        dateValue = picker.toString() ;
+      });
+    }
   }
 
   @override
   initState() {
     super.initState();
+    _item = [];
+    _item.add(BottomNavigationBarItem(
+        icon: Icon(
+          Icons.local_hospital,
+          color: Colors.purple,
+        ),
+        label: "hospital"));
+    _item.add(BottomNavigationBarItem(
+        icon: Icon(
+          Icons.restaurant_menu,
+          color: Colors.purple,
+        ),
+        label: "restaurant"));
+    _item.add(BottomNavigationBarItem(
+        icon: Icon(
+          Icons.hotel,
+          color: Colors.purple,
+        ),
+        label: "hotel"));
     info = "bienvenue sur le tuo";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         centerTitle: true,
         actions: <Widget>[
-          IconButton(
-              onPressed: increment,
-              icon: Icon(
-                Icons.download,
-                size: 30,
-              )),
-          // Icon(Icons.download , size: 30,),
-          IconButton(
-              onPressed: decrement,
-              icon: Icon(
-                Icons.upload,
-                size: 30,
-              )),
           Padding(padding: EdgeInsets.only(top: 40))
           // Icon(Icons.upload , size: 30,)
         ],
@@ -71,24 +81,18 @@ class _soirState extends State<soir> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "the value is   $value",
-              style: TextStyle(fontSize: 20, color: Colors.orange),
-              textAlign: TextAlign.center,
-            ),
-            RaisedButton(
-              onPressed: (){ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('A SnackBar has been shown.'),
-                ),
-              );},
-              child: Text(
-                "supprimer le message",
-                style: TextStyle(color: Colors.black, fontSize: 25),
-              ),
-            )
+            Text("la date selectionné est : $dateValue" ),
+            RaisedButton(onPressed: select_date,child: Text("selectionner une date"),)
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: _item,
+        fixedColor: Colors.blue,
+        currentIndex: _id,
+        onTap: (int item) {
+          _id = item;
+        },
       ),
     );
   }
