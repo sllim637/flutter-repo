@@ -22,7 +22,6 @@ class _soirState extends State<soir> {
   String info = "bienvenue minsieur/madame";
   int value = 0;
   int _id = 0;
-
   void increment() {
     setState(() {
       value++;
@@ -44,6 +43,7 @@ class _soirState extends State<soir> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         centerTitle: true,
         actions: <Widget>[
@@ -76,30 +76,19 @@ class _soirState extends State<soir> {
               style: TextStyle(fontSize: 20, color: Colors.orange),
               textAlign: TextAlign.center,
             ),
+            RaisedButton(
+              onPressed: (){ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('A SnackBar has been shown.'),
+                ),
+              );},
+              child: Text(
+                "supprimer le message",
+                style: TextStyle(color: Colors.black, fontSize: 25),
+              ),
+            )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _id,
-        onTap: (int item) {
-          setState(() {
-            _id = item;
-          });
-        },
       ),
     );
   }
